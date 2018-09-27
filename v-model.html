@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义组件v-model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <base-checkbox v-model="ag1" @change="changes"></base-checkbox>
+    </div>  
+</body>
+<script type="text/javascript">
+    Vue.component('base-checkbox', {
+        model: {
+            prop: 'checked',
+            event: 'change'
+        },
+        props: {
+            checked: Boolean
+        },
+        template: `
+            <input type="checkbox"
+            v-bind:checked="checked"
+            v-on:change="$emit('change', $event.target.checked)">
+          `
+  });
+    new Vue({
+      el: '#app',
+      data: {
+        ag1:true
+      },
+      methods: {
+        changes(){
+          console.log(this.ag1);
+        }
+      }
+    })
+  // 当有数据输入时触发了该组件的input事件
+  // 手动触发父组件的input事件并将值传给父组件
+  // 父组件的input事件被触发，将传来的值赋给了父组件的变量hello
+  // 父组件的value的值绑定到hello   
+  // 以上就实现了输入框value到父组件的hello的单向数据传递
+
+  // 以下实现父组件的hello到子组件value的单向绑定：
+  // 父组件的value的值绑定到hello
+  // 将父组件的hello值通过props传递给子组件，
+  
+</script>
+</html>
+
+
+
+<!--   // Vue.component('input-price', {
+    //     template: `<input type='text'>`,
+        
+    // });
+    // var vm = new Vue({
+    //     el: '#app',
+    //     data: {
+    //          price: ''
+    //     }
+    // }); 
+   <div id="app">
+        <input-price v-model="price"></input-price>
+    </div> -->

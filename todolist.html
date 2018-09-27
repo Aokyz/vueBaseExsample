@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todolist</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+        <input type="text" @keydown.enter="addTodo" v-model="newTodoText">
+        <button @click="addTodo">添加</button>
+        <ul>
+            <todo-list v-for="(item,index) in todos" 
+            :todo-item="item"
+            :todo-index="index"
+            v-on:remove="removeItem"></todo-list>
+        </ul>
+    </div>
+    
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '这是一个todolist 例子',
+                todos: [],
+                newTodoText:''
+            },
+            components: {
+                "todo-list":{
+                    template:`
+                    <li>
+                        代办项为： {{todoItem}}
+                        <input @click="removeTodo" type="button" value="X">
+                        </li>
+                    `,
+                    props: ["todo-item","todo-index"],
+                    methods: {
+                        removeTodo(index){
+                            this.$emit('remove',index);
+
+                        }
+                    }
+                }
+            },
+
+            methods: {
+                addTodo(){
+                    this.todos.push(this.newTodoText);
+                    this.newTodoText=" ";
+                },
+                removeItem(index){
+                    console.log(index);
+                    this.todos.splice(index,1);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

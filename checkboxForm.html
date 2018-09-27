@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id='example-3'>
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+  <label for="jack">Jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+  <label for="john">John</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+  <label for="mike">Mike</label>
+  <br>
+  <span>Checked names: {{ checkedNames }}</span>
+  <button v-on:click="finde">获得多选框的值</button>
+</div>  
+<div id="example-4">
+  <input type="radio" id="one" value="One" v-model="picked">
+  <label for="one">One</label>
+  <br>
+  <input type="radio" id="two" value="Two" v-model="picked">
+  <label for="two">Two</label>
+  <br>
+  <span>Picked: {{ picked }}</span>
+  <button v-on:click="radioFinde">获得多选框的值</button>
+</div>
+<div id="example-5">
+  <select v-model="selected">
+    <option disabled value="">请选择</option>
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <span>Selected: {{ selected }}</span>
+</div>
+</body>
+<script type="text/javascript">
+var example3 = new Vue({
+  el: '#example-3',
+  data: {
+    checkedNames: []
+  },
+  methods: {
+    finde:function(){
+        console.log(this.checkedNames);
+    }
+  }
+});
+     var example4 = new Vue({
+ el: '#example-4',
+  data: {
+    picked: ''
+  },
+  methods: {
+    radioFinde:function(){
+        console.log(this.picked);
+    }
+  }
+});
+var example5 = new Vue({
+ el: '#example-5',
+  data: {
+    selected: 'C'
+  },
+  methods: {
+    radioFinde:function(){
+        console.log(this.picked);
+    }
+  }
+});
+</script>
+</html>

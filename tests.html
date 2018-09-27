@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="abc">
+    <select id="sel">
+        <option>水电费</option>
+        <option>水电费</option>
+        <option>水电费</option>
+        <option>水电费</option>
+    </select>
+    <input type="checkbox" name="sing" value="唱歌">唱歌
+</body>
+<script type="text/javascript">
+        var a = document.getElementById('abc');
+        a.oninput = function(){
+            console.log('1')
+        }
+        sel.onchange=function(){
+            console.log('2');
+            console.log(this.selected)
+        }
+    </script>   
+</html>

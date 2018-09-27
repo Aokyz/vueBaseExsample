@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DEMO</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+   <h1>条件渲染</h1>
+
+
+<div id="s4">
+  <h3>v-if渲染会实际创建和销毁对象</h3>
+  <p>分数是:<input type="text" v-model="mark"/></p>
+  <p v-if="mark < 60">不及格</p>
+  <p v-else-if="mark <80">及格</p>
+  <p v-else="">优秀</p>
+  <h3>v-show仅仅调用CSS display属性</h3>
+  <button @click="toggleShow">改变show状态</button>
+  <p v-show="show">可以看到我</p>
+</div>
+<script>
+  let vm4 = new Vue({
+    el: '#s4',
+    data: {
+      mark: 80,
+      show: true
+    },
+    methods: {
+      toggleShow: function () {
+        this.show = !this.show
+      }
+    }
+  })
+</script>
+</body>
+</html>

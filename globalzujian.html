@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件的注册</title>
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <hello-world></hello-world>
+        <!-- <hello></hello> -->
+    </div>
+    <div id="app2">
+        <hello-world></hello-world>
+       <hello></hello>
+    </div>
+    <div id="app3">
+         <hello></hello>
+         <hello-world></hello-world>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.component('hello-world',{
+        template: `
+            <p>{{msg}}</p>
+        `,
+        data(){
+            return {
+                msg: '我是全局注册的helloworld！'
+            }
+        }
+        props:{
+            //基础的类型检查
+            propA: Number,
+            //多个可能的类型
+            propB: [String,Number]
+        }
+    });
+    var vm1 = new Vue({
+        el: '#app',
+    });
+    let component1 = {
+         template: `
+            <p>{{msg}}</p>
+        `,
+        data(){
+            return {
+                msg: '我是局部注册的helloworld！'
+            }
+        }
+    };
+    var vm2 = new Vue({
+        el: '#app3',
+        components: {
+            'hello': component1
+        }
+    })
+</script>
+</html>

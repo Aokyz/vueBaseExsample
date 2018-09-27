@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue基础</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app" class="mainds">
+        {{message}}
+    </div>
+    <div id="app-2">
+        <span>sdfeed</span>
+        <span v-bind:title="message"> <!-- v-bind指令在需要绑定HTML标签属性的时候使用，为了方便，该指令有一个缩写，“：”，例如： :class="myclass"就相当于v-bind:class="myclass" -->
+            鼠标悬停几秒钟查看信息
+        </span>
+    </div>
+    <div id="app-3">
+        <p v-if="seen">现在你看到我了</p> <!-- v-if用于条件渲染 -->
+    </div>
+    <div id="app-4">
+        <ol>
+            <li v-for="todo in todos"><!-- v-for用于渲染整个列表 -->
+                {{todo.text}}
+            </li>
+        </ol>
+    </div>
+    <div id="app-5">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMessage">逆转信息</button><!-- v-on用于绑定事件处理程序，该指令的缩写有@，例如：@click = "onClick"就相当于v-on:click="onClick" -->
+    </div>
+    <div id="app-6">
+        <p>{{message}}</p>
+        <input type="text" v-model="message"> <!-- v-model 该指令可以让页面元素和数据进行双向绑定，默认是单向的，主要用于表单 -->
+    </div>
+    <div id="app-7">
+        <ol>
+            <todo-item v-for="item in groceryList" 
+            v-bind:todo="item"
+            v-bind:key="item.id">
+                
+            </todo-item>
+        </ol>
+    </div>
+    <script type="text/javascript">
+        //注意查看网页源代码的变化
+           Vue.component('App',{
+            template:'<div class="App"><h3>想知道实例里面的template是啥东西</h3></div>',
+        })
+           let component1 = {
+             template:'<div class="App"><h3>想知道实例里面的template是啥东西</h3></div>',
+           }
+        var app=new Vue({
+            el:'#app',
+            data:{
+                message:'Hello Vue!'
+            },
+            // template:'<App/>',
+            // components:{'App2':App}
+        });
+        var app2=new Vue({
+            el:'#app-2',
+            data(){
+                return {
+                     message:'页面加载于'+new Date().toLocaleString()
+                }
+               
+            },
+            template:`<div>{{message}}</div>`
+        });
+        var app3=new Vue({
+            el:'#app-3',
+            data:{
+                seen:true
+            }
+        });
+        var app4=new Vue({
+            el:'#app-4',
+            data:{
+                todos:[
+                    {text:'学习JavaScript'},
+                    {text:'学习Vue'},
+                    {text:'整个牛项目'}
+                ]
+            }
+        });
+        var app5=new Vue({
+            el:'#app-5',
+            data:{
+                message:'Hello Vue!'
+            },
+            methods:{
+                reverseMessage:function(){
+                    this.message=this.message.split('').reverse().join('');
+                }
+            }
+        });
+        var app6 = new Vue({
+            el:'#app-6',
+            data:{
+                message:'hello vue'
+            }
+        });
+        Vue.component('todo-item',{
+            props:['todo'],
+            template:'<li>{{ todo.text }}</li>',
+        })
+        var app7 = new Vue({
+            el:'#app-7',
+            data:{
+                groceryList:[
+                {id:0,text: '蔬菜'},
+                {id: 1, text:'奶酪'},
+                {id: 2, text:'劳斯莱斯'}
+                ]
+            }
+        })
+
+    </script>
+</body>
+</html>

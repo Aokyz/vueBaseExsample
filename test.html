@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="s8">
+    <hello-world></hello-world>
+    </div>
+    <div id="s9">
+    <hello-world></hello-world>
+    </div>
+    <script type="text/javascript">
+        //定义
+    let component2 = {
+        template: '<p>{{hello}} {{name}}</p>',
+        data() {
+          return {
+            hello: 'hello world'
+          }
+        },
+        props: [
+          'name'
+        ]
+    }
+    //局部注册，只能用于元素s8，而且会报错
+       let vm8 = new Vue({
+        el: '#s8',
+        data: {
+          name: 'yitian'
+        },
+        components: {
+          'hello-world': component2,
+        }
+    });
+       let vm9 = new Vue({
+        el:'#s9',
+        data: {
+            name: 'sef'
+        }
+       })
+       //全局注册，可以用于多个vue实例，只要创建就可以了
+
+    //    Vue.component('hello-world',{
+    //     template: '<p>{{hello}} {{name}}</p>',
+    //     props: ['name'],
+    //     data() {
+    //         return {
+    //             hello: 'hello world'
+    //         }
+    //     }
+    //    })
+    //    new Vue({
+    //   el:'#s8',
+    //   data: {val : 1}, //这个数据是初始化Vue实例就定义的
+    // });
+    //    new Vue({
+    //   el:'#s9',
+    //   data: {val : 1}, //这个数据是初始化Vue实例就定义的
+    // });
+    </script>
+</body>
+</html>

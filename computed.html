@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DEMO</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+        <h1>计算属性</h1>
+    <div id="s3">
+  <p>单词：{{words}}</p>
+  <p>单词大写：{{toUpper}}</p>
+  </div>
+<script>
+  let vm3 = new Vue({
+    el: '#s3',
+    data: {
+      words: 'I love you'
+    },
+    computed: {
+      toUpper: function () {
+        return this.words.toUpperCase()
+      }
+    }
+  })
+</script>
+</script>
+</body>
+</html>

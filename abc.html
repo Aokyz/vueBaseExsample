@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基础DEMO</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+<!--   指令：
+  v-once   
+  这个指令让视图只渲染一次，将来就算相应的数据发生变化，也不会重新渲染
+  v-html,v-text
+  作用差不多都是显示文本和{{}}一样，但那时有了v-html或v-text{{}}就没有用了，区别：v-html能识别标签
+  v-bind
+  该指令在需要绑定HTML标签属性的时候使用，为方便，该指令有一个缩写，“：”，例如： :class="myclass"就相当于v-bind:class="myclass"
+  v-on
+  用于事件绑定 -->
+	<h1>模板语法</h1>
+	<div id="s2">
+	  	<button v-on:click='changeText'>修改文本</button>
+		<p>文本：{{text}}</p>
+		<p>组合表达式：</p>
+		<p v-once>只渲染一次的文本:{{text}}</p>
+		<p>HTML代码：<span v-html="html"></span></p>
+		<p>属性:
+		    <button v-bind:disabled="disabled">禁用按钮</button>
+		</p>
+	</div>
+<script>
+  let vm2 = new Vue({
+    el: '#s2',
+    data: {
+      text: 1,
+      html: '<del>666</del>',
+      disabled: true
+    },
+    methods: {
+      changeText: function (event) {
+        this.text += 1
+      }
+    }
+  })
+</script>
+</body>
+</html>

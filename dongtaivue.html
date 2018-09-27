@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app6">
+    <select v-model="currentComponent">
+      <option value="home">home</option>
+      <option value="post">post</option>
+      <option value="about">about</option>
+    </select>
+    <component :is="currentComponent"></component>
+  </div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#app6',
+        data: {
+          currentComponent: 'home'
+        },
+        components: {
+          home: {
+            template: `<header>这是home组件</header>`
+          },
+          post: {
+            template: `<header>这是post组件</header>`
+          },
+          about: {
+            template: `<header>这是about组件</header>`
+          }
+        }
+      })
+</script>
+</html>

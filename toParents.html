@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通过事件向父级组件发送信息</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="blog-posts-events-demo">
+        <div :style="{fontSize: postFontSize+'em'}">
+            <blog-post
+                v-for="post in posts"
+                v-bind:key="post.id"
+                v-bind:post="post"
+                v-on:enlarge-text="postFontSize +=$event">
+            </blog-post>
+        </div>
+    </div>
+    <div id="box"><alert-box>something bad happened</alert-box></div>
+    <script type="text/javascript">
+        // 双引号里如果还有需要双引号的地方引号要转译(\)或用单引号。就是 双引号内部能在含有双引号，单引号内不能在出现单引号。
+        Vue.component('blog-post',{
+            props: ['post'],
+            template:"<div class=\"blog-post\"><h3>{{post.title }}</h3><button v-on:click=\"$emit('enlarge-text',0.1)\">Enlarge text </button><div v-html=\"post.content\"></div></div>"
+        })
+        var example = new Vue({
+            el:'#blog-posts-events-demo',
+            data:{
+                posts:[
+                    {id: 1,title: 'you',content: 'hellohello',name:'esd'},
+                    {id: 2,title: 'my',content: 'hellohello', name:'esd'},
+                    {if: 3,title: 'me',content: 'hellohello', name:'esd'}
+                ],
+                postFontSize:1
+            }
+        });
+        Vue.component('alert-box',{
+            template:'<div class="demo-alert-box"><strong>Error!</strong><slot></slot></div>'
+        });
+        new Vue({el:'#box'})
+    </script>
+</body>
+</html>

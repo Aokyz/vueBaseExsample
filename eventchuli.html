@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <h1>事件处理</h1>
+    <div id="s6">
+          <h3>计数器</h3>
+          <p>
+            <button @click="addCount">增加计数</button>
+            <em>{{count}}</em>
+          </p>
+          <h3>获取按键(单击、回车和空格)</h3>
+          <input type="text"
+                 @keyup.enter="submitd"
+                
+               />
+    </div>
+<script>
+  let vm6 = new Vue({
+    el: '#s6',
+    data: {
+      count: 0
+    },
+    methods: {
+      addCount: function () {
+        this.count++
+      },
+      submitd:function(){
+        alert('按下了回车');
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+
+    <!--------------------用v-for把一个数组对应为一组元素------------------------------->
+
+<!--     v-for 把一个数组对应为一组元素。v-for指令需要使用item in items 形式的特殊语法，items是源数据数组并且item是数组元素迭代的别名 -->
+    <ul id="example-1">
+        <li v-for="item in items">{{ item.message }}</li>
+    </ul>
+<!--     在v-for块中，我们拥有对父作用域属性的完全访问权限。v-for还支持一个可选的第二个参数为当前项的索引。 -->
+    <ul id="example-2">
+        <li v-for="(item,index) in items">
+            {{parentMessage}}-{{index}}-{{item.message}}
+        </li>
+    </ul>
+
+
+
+    <!------------------------一个对象的v-for----------------------------------------------->
+    <hr>
+    <ul id="example-3">
+        <li v-for="value in object">{{value}}</li>
+    </ul>
+
+    <script type="text/javascript">
+        var example1 = new Vue({
+            el:'#example-1',
+            data: {
+                items: [
+                    {message: 'Foo'},
+                    {message: 'Bar'}
+                ]
+            }
+        });
+        var example2 = new Vue({
+            el: '#example-2',
+            data: {
+                parentMessage: 'Parent',
+                items: [
+                    {message: 'Foo'},
+                    {message: 'Bar'}
+                ]
+            }
+        });
+        var example3 = new Vue({
+            el:'#example-3',
+            data: {
+                object:{
+                    firstname:'Foo',
+                    lastname: 'esd',
+                    age:23
+                }
+            }
+        })
+    </script>
+</body>
+</html>

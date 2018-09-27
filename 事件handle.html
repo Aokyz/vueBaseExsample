@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理方法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example-1">
+        <button v-on:click = "greet">Greet</button>
+    </div>
+    <script type="text/javascript">
+        var example1 = new Vue({
+            el: '#example-1',
+            data: {
+                name: 'Vue.js'
+            },
+            methods: {
+                greet: function(event){
+                    alert('Hello'+ this.name + '!');
+                    if(event){
+                        alert(event.target.tagName);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

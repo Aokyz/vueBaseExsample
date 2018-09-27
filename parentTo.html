@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父传子</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+     <div id="app">
+        {{name}} <input type="text" v-model="name">
+        {{age}} <input type="text" v-model="age">
+
+           <hello v-bind:my-name.sync="name" v-bind:my-age.sync="age"></hello>
+       <base-input ref=""
+        
+     </div>
+</body>
+<script>
+     Vue.component('hello',{
+            template: `
+                <div>姓名:{{myName}}，<input type="text" v-model="mname" @input="change">年龄：{{myAge}}<input type="text" v-model="myAge"></div>
+            `,
+            props: ['myName','myAge'],
+            data(){
+                return {
+                    mname: ''
+                }
+            },
+            methods: {
+                change(){
+                    this.$emit('update:myName',this.mname)
+                }
+            },
+            components: {
+              'hot-component': () => import('./HotComponent.vue'),
+              'nav-component': () => import('./NavComponent.vue')
+            }
+        })  
+     let vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'Zcl',
+            age:  21
+        }
+     });
+       
+</script>
+</html>

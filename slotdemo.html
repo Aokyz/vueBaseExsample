@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slot分发内容</title>
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <page>
+            <page-header slot="header"></page-header>
+            <page-footer slot="footer"></page-footer>
+        </page>
+    </div>
+</body>
+<script type="text/javascript">
+ 
+
+
+    Vue.component("page-header",{
+        template:`
+            <header>
+                我是page-header组件里的内容
+            </header>
+        `
+    });
+    Vue.component("page-footer",{
+        template:`
+            <footer>
+                我是page-footer组件里的内容
+            </footer>
+        `
+    });
+    Vue.component("page",{
+        template:`
+        <div>
+            <slot name="header"></slot>
+            <main>我是主体的内容</main>
+            <slot name="footer"></slot>
+        </div>
+        `,
+
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'dsdfsfs',
+        }
+    })
+</script>
+</html>

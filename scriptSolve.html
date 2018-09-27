@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+    </div>
+    <template  id="myComponent">
+        <div> 这是一个组件 </div>
+    </template>
+    <table id="app2">
+        <tr is="my-row"></tr>
+    </table>
+</body>
+<script type="text/javascript">
+    Vue.component('my-component',{
+        template: '#myComponent'
+    })
+    new Vue({
+        el: '#app'
+    })
+    Vue.component('my-row',{
+        template: `
+            <p>{{msg}}</p>
+        `,
+        data(){
+            return {
+                msg: 'hello'
+            }
+        }
+    });
+    var vm = new Vue({
+        el: '#app2'
+    })
+</script>
+</html>

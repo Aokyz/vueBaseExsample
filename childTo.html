@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子传父</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app3">
+    <my-component2 v-on:myclick="onClick"></my-component2>
+</div>
+</body>
+<script>
+  Vue.component('my-component2', {
+    template: `<div>
+    <button type="button" @click="childClick">点击我触发自定义事件</button>
+    </div>`,
+    methods: {
+      childClick () {
+        this.$emit('myclick', '这是我暴露出去的数据')
+      }
+    }
+  })
+  new Vue({
+    el: '#app3',
+    methods: {
+      onClick()  {
+        console.log(arguments)
+      }
+    }
+  })
+</script>
+</html>

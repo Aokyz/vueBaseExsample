@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <blog-post
+            v-for="post in posts"
+            v-bind:key="post.id"
+            v-bind:post="post">
+        </blog-post>
+    </div>
+    
+    <script type="text/javascript">
+        //v-html用于改变dom元素的innerHTML值，插入html，此时就不需要两个花括号了
+        Vue.component('blog-post',{
+            props: ['post'],
+            template:'<div class="blog-post"><h3>{{post.title }}</h3><div v-html="post.content"></div></div>'
+        })
+        var example = new Vue({
+            el:'#example',
+            data:{
+                posts:[
+                    {id: 1,title: 'you',content: 'hellohello',name:'esd'},
+                    {id: 2,title: 'my',content: 'hellohello', name:'esd'},
+                    {if: 3,title: 'me',content: 'hellohello', name:'esd'}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

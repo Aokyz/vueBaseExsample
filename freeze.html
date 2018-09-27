@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>freeze</title>
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app2">
+            <p>{{ foo }}</p>
+        <button v-on:click="change">change it</button>
+        </div>
+        
+        <div id="demo">{{ fullName }}</div>
+    </div>
+    <script type="text/javascript">
+        var obj = {
+            foo:'bar'
+        }
+        Object.freeze(obj);  //这时候点击按钮就会报错，阻止修改现有属性
+        var ddd = new Vue({
+            el:'#app2',
+            data:obj,
+            methods:{
+                change:function(){
+                    this.foo='hels';//这里要改变foo的值的话前面一定要有this
+                }
+            }
+
+        });
+        var vm = new Vue({
+            el:'#demo',
+            data:{
+                firstName:'Foo',
+                lastName: 'Bar'
+
+            },
+            computed:{
+                fullName:{
+                    get:function(){
+                        return this.firstName+ ' '+this.lastName;
+                    },
+                    set:function(newValue){
+                        var names = newValue.split(' ');
+                        this.firstName = names[0];
+                        this.lastName = names[names.length-1];
+                    }
+                }
+                // fullName:function(){
+                //     return this.firstName + ' ' + this.lastName;
+                // }
+            }
+        })
+    </script>
+</body>
+</html>

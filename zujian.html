@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <h1>组件</h1>
+    <div id="s8">
+      <h3>hello world组件</h3>
+      <hello-world></hello-world>
+      <h3>从父组件传递数据</h3>
+      <hello-world name="zhang3"></hello-world>
+      <h3>动态传递数据</h3>
+      <hello-world :name="name"></hello-world>
+    </div>
+    <div id="app">
+     <!--  <root> 隐性的根组件，相对于注册的全局组件child来说，是父组件 -->
+         <child msg="hello world"></child>   <!-- child相对root来说是子组件，而msg这个变量是存在于父组件内的，应该属于父组件的 -->
+    <!--  </root> -->
+    
+    </div>
+<script>
+  //定义一个全局组件，组件标签名为component1
+    let component1 = {
+        template: '<p>{{hello}} {{name}}</p>',
+        data() {
+          return {
+            hello: 'hello world'
+          }
+        },
+        props: [
+          'name'
+        ]
+    }
+    //局部注册
+    let vm8 = new Vue({
+        el: '#s8',
+        data: {
+          name: 'yitian'
+        },
+        components: {
+          'hello-world': component1,
+        }
+  });
+    //注册一个全局组件，组件标签名为child
+    Vue.component('child',{
+      props:['msg'],
+      template:'<span>{{msg}}</span>',
+      data(){return {val: 2};},
+    });
+    new Vue({
+      el:'#app',
+      data: {val : 1}, //这个数据是初始化Vue实例就定义的
+    });
+</script> 
+</body>
+</html>

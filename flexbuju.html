@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex布局</title>
+    <style type="text/css">
+    *{
+        margin:0;
+        padding:0;
+    }
+        .container{
+            display:flex;
+            /*width:100%;
+            height:500px;
+            border:1px solid blue;
+            padding:30px 40px;
+            box-sizing:border-box;*/
+           /* justify-content: space-between;*/
+           border:1px solid blue;
+           height:500px;
+        }
+        .item1{
+           background:red;
+          /* flex-basis: 100px;*/
+          flex:1;
+        }
+        .item2{
+           /* background: green;*/
+            flex:1;
+         /*   flex-basis: calc(100%-100px);*/
+         display:flex;
+          flex-direction: column;
+        }
+        .item2-item{
+            background:green;
+            flex:1;
+
+        }
+        .item2-items{
+            background:yellow;
+            flex:2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item1">
+            <p>sdlsfsjfsff</p>
+        </div>
+        <div class="item2">
+            <div class="item2-item">我是第一部分</div>
+            <div class="item2-items">我是第二部分</div>
+        </div>
+      <!--   <div class="item">
+            <p>第三个isdflsefjsfjs</p>
+        </div> -->
+    </div>
+    <script type="text/javascript">
+        // JSON对象的一些验证
+        
+        var shuzu = [{name:'zcl',age: 21},{name: 'www',age:23},{name: 'sef',age: 21}]
+        console.log(typeof shuzu );
+        var data = [1,2,2,4,5]
+        // 参数： value   数组中的当前项
+        //          index    当前项的索引
+        //          array    原始数组
+        // 数组中有几项，那么传递进去的匿名函数就需要执行几次
+        // 理论上这个方法是没有返回值的，仅仅是遍历数组中的每一项，不对原来数组进行修改
+        shuzu.forEach(function(value,index,array){
+            console.log(value +","+index+ ","+array[index])
+        }) 
+        //for-of遍历数组，不带索引，item即为数组元素
+        for(let item of shuzu){
+            console.log(item);
+        }
+        //for-in遍历数组，prop就是索引
+        for(var prop in shuzu){
+            console.log(prop);
+            console.log(shuzu[prop]);
+        }
+        //for-in 遍历对象，prop就是对象的属性
+        var item={"description": null,"iconName":"registerIcon.png","iconPath":"sldfse"};
+        for(let prop in item ){
+            console.log(prop);
+        }
+        //Object.keys(obj)用来获取对象属性名的集合
+        let xyz = {z:"zzz",x: "xxx",y: "yyy"};
+        console.log(Object.keys(xyz));
+        // console.log(shuzu );
+        // var str = JSON.stringify(shuzu)
+        // console.log(typeof str);
+        // console.log(JSON.parse(str));
+        // console.log(typeof (JSON.parse(str)))
+        // var obj = {name: 'zcl',age: 21};
+        // console.log(obj)
+        // console.log(JSON.stringify(obj));
+
+    </script>
+</body>
+</html>
