@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>watch监视路由的变化</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+	<script type="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+	<div id="app">
+		<router-link to="/login">登陆</router-link>
+		<router-link to="/register">注册</router-link>
+
+		<router-view></router-view>
+	</div>
+	<script >
+		//创建子组件
+		var login = {
+			template: '<h3>这是登录子组件，这个组件是zcl开发的</h3>'
+		}
+		var register = {
+			template: '<h3>这是注册子组件，这个组件是zcl开发的</h3>'
+		}
+
+		//创建一个路由对象
+		var router = new VueRouter({
+			routes: [
+			{path:'/',redirect: '/login'},
+			{path: '/login', component: login},
+			{path: '/register', component: register}
+			],
+			linkActiveClass: 'myactive'
+		})
+		//创建Vue实例，得到ViewModel
+		var vm = new Vue({
+			el: '#app',
+			data: {},
+			methods: {},
+			router,
+			watch: {
+				'$route.path':function(newVal,oldVal){
+					console.log(newVal + '---'+ oldVal);
+				}
+			}
+		})
+
+	</script>
+</body>
+</html>

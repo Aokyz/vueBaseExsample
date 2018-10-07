@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全局和局部过滤器</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+	<!--
+		过滤器的全局和私有就和components的全局私有类似
+		过滤器调用的时候使用的是就近原则，先找局部，找不到才会去找全局的，
+
+	-->
+	<div id="app1">
+		{{time | dataFormat('yyyy-mm-dd')}}
+	</div>
+
+	<div id="app2">
+		{{time | dataFormat('yyyy-mm-dd')}}
+	</div>
+	<script type="text/javascript">
+		Vue.filter('dataFormat',function(data,pattern=''){
+			var time = new Date(data);
+			var y = time.getFullYear();
+			var m = time.getMonth()+1;
+			var d = time.getDate();
+			if(pattern.toLowerCase()==='yyyy-mm-dd'){
+				return `${y}-${m}-${d}`;
+			}
+			else {
+				var h = time.getHours();
+				var mm = time.getMinutes();
+				var ss = time.getSeconds();
+				return `${h}-${mm}-${ss}`;
+			}
+		})
+		var vm1 = new Vue({
+			el:'#app1',
+			data: {
+				time: new Date(),
+			},
+			methods: {},
+		});
+		//局部filter
+		var vm2 = new Vue({
+			el: '#app2',
+			data: {
+				time: new Date(),
+			},
+			methods: {},
+			filters: {
+				//过滤器有两个条件   【过滤器名称 和 处理函数】
+				dataFormat: function(data,pattern = ''){
+					var time = new Date(data);
+					var y = time.getFullYear();
+					var m = time.getMonth()+1;
+					var d = time.getDate();
+					if(pattern.toLowerCase()==='yyyy-mm-dd'){
+						return `${y}-${m}-${d}`;
+					}
+					else {
+						var h = time.getHours();
+						var mm = time.getMinutes();
+						var ss = time.getSeconds();
+						return `${h}-${mm}-${ss}`;
+					}
+				}
+
+			}
+		})
+	</script>
+</body>
+</html>
